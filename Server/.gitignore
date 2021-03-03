@@ -1,0 +1,19 @@
+# visual studio
+.vs/
+*.user
+*.suo
+
+# c sharp
+bin/
+obj/
+
+# asp.net
+aspnet_client/
+Web.Debug.config
+Web.Release.config
+
+# others
+compilerconfig.json.defaults
+*.bak
+_*.*
+_*/

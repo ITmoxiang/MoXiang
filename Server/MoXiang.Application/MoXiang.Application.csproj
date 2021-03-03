@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MoXiang.Infrastructure\MoXiang.Infrastructure.csproj" />
+    <ProjectReference Include="..\MoXiang.Repository\MoXiang.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SignalR\" />
+  </ItemGroup>
+
+</Project>

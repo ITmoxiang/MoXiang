@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MoXiang.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:MoXiang.WebApi.Controllers.ArticleController.Load(MoXiang.Application.Request.QueryArticleReq)">
+            <summary>
+            查询文章列表
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoXiang.WebApi.Controllers.ArticleController.GetDetails(System.Int32)">
+            <summary>
+            查询单个文章信息
+            </summary>
+            <param name="ArticleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoXiang.WebApi.Controllers.ArticleController.Add(MoXiang.Application.Request.AddOrUpDataArticleReq)">
+            <summary>
+            添加文章
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoXiang.WebApi.Controllers.ArticleController.UpData(MoXiang.Application.Request.AddOrUpDataArticleReq)">
+            <summary>
+            添加文章
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoXiang.WebApi.Controllers.MapController.GetGeocoding(System.String)">
+            <summary>
+            根据地址获取经纬度
+            </summary>
+            <param name="Address"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoXiang.WebApi.Controllers.SwaggerController.ExportDocument(System.String,System.String)">
+            <summary>
+            导出接口离线文档
+            </summary>
+            <param name="type">文件类型</param>
+            <param name="version">版本号V1</param>
+            <returns></returns>
+        </member>
+        <member name="M:MoXiang.WebApi.Controllers.UserInfoController.Load">
+            <summary>
+            获取所有用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MoXiang.WebApi.Controllers.UserInfoController.Get">
+            <summary>
+            redis示例
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MoXiang.WebApi.Controllers.UserInfoController.GetUserDetails">
+            <summary>
+            获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MoXiang.WebApi.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
+            <summary>
+            AutoFac依赖注入
+            </summary>
+            <param name="builder"></param>
+        </member>
+    </members>
+</doc>
