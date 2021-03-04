@@ -99,35 +99,36 @@ namespace MoXiang.Repository.Dapper
             return r;
         }
 
-        //public T Detail<T>(string selectSql) where T : class
-        //{
-        //    using (IDbConnection conn = _dbcontext.Connection)
-        //    {
-        //        return conn.QueryFirstOrDefault<T>(selectSql);
-        //    }
-        //}
-
-        //public Task<T> DetailAsync<T>(string selectSql) where T : class
-        //{
-        //    using (IDbConnection conn = _dbcontext.Connection)
-        //    {
-        //        return conn.QueryFirstOrDefaultAsync<T>(selectSql);
-        //    }
-        //}
-
-        public List<object> Find<T>(string selectSql, object entity = null) where T : class
+        public object Detail<T>(string selectSql, object entity = null, IDbConnection conn = null, IDbTransaction transaction = null) where T : class
         {
-            var conn = DbConnection<T>();
-            var result = conn.Query(selectSql, entity).ToList();
-            Close(conn);
+
+            conn = conn == null ? DbConnection<T>() : conn;
+            var result = conn.QueryFirstOrDefault(selectSql,entity);
+            if (transaction == null) Close(conn);
             return result;
         }
 
-        public async Task<List<object>> FindAsync<T>( string selectSql, object entity = null) where T : class
+        public async Task<object> DetailAsync<T>(string selectSql, object entity = null, IDbConnection conn = null, IDbTransaction transaction = null) where T : class
         {
-            var conn = DbConnection<T>();
+            conn = conn == null ? DbConnection<T>() : conn;
+            var result = conn.QueryFirstOrDefaultAsync(selectSql,entity);
+            if (transaction == null) await CloseAsync(conn);
+            return result;
+        }
+
+        public List<object> Find<T>(string selectSql, object entity = null, IDbConnection conn = null, IDbTransaction transaction = null) where T : class
+        {
+            conn = conn == null ? DbConnection<T>() : conn;
+            var result = conn.Query(selectSql, entity).ToList();
+            if (transaction == null) Close(conn);
+            return result;
+        }
+
+        public async Task<List<object>> FindAsync<T>( string selectSql, object entity = null, IDbConnection conn = null, IDbTransaction transaction = null) where T : class
+        {
+            conn = conn == null ? DbConnection<T>() : conn;
             var result = await Task.Run(() => conn.Query(selectSql, entity).ToList());
-            await CloseAsync(conn);
+            if (transaction == null)  await CloseAsync(conn);
             return result;
         }
 

@@ -18,10 +18,10 @@ namespace MoXiang.Repository.Dapper
         Task<int> UpDateAsync<T>( string updateSql, object entity = null, IDbConnection conn = null, IDbTransaction transaction = null) where T : class;//异步修改
         int Delete<T>(string deleteSql, object entity = null, IDbConnection conn = null, IDbTransaction transaction = null) where T : class;//删除
         Task<int> DeleteAsync<T>( string deleteSql, object entity = null, IDbConnection conn = null, IDbTransaction transaction = null) where T : class;//异步删除
-        List<object> Find<T>( string selectSql, object entity = null) where T : class;//查询列表
-        Task<List<object>> FindAsync<T>(string selectSql, object entity = null) where T : class;//异步查询列表
-        //T Detail<T>(string selectSql) where T : class;//查询单个数据
-        //Task<T> DetailAsync<T>(string selectSql) where T : class;//异步查询单个数据
+        List<object> Find<T>( string selectSql, object entity = null, IDbConnection conn = null, IDbTransaction transaction = null) where T : class;//查询列表
+        Task<List<object>> FindAsync<T>(string selectSql, object entity = null, IDbConnection conn = null, IDbTransaction transaction = null) where T : class;//异步查询列表
+        object Detail<T>(string selectSql, object entity = null, IDbConnection conn = null, IDbTransaction transaction = null) where T : class;//查询单个数据
+        Task<object> DetailAsync<T>(string selectSql, object entity = null, IDbConnection conn = null, IDbTransaction transaction = null) where T : class;//异步查询单个数据
         void Close(IDbConnection conn);
         Task CloseAsync(IDbConnection conn);
     }

@@ -1,4 +1,5 @@
 ﻿using MoXiang.Application.Request;
+using MoXiang.Application.Response;
 using MoXiang.Infrastructure.AutoMapper;
 using MoXiang.Infrastructure.Returned;
 using MoXiang.Repository.Dapper;
@@ -36,7 +37,8 @@ namespace MoXiang.Application
                 sql += $" GROUP BY a.Id LIMIT {req.page*req.limit},@limit";
             }
             var articleList =await  _repositorybase.FindAsync<Article>(sql, req);
-            data.Data = articleList.ToList();
+            var ArticleListResps = articleList.MapToList<ArticleListResp>();
+            data.Data = ArticleListResps;
             data.Count = _repositorybase.Find<Article>("select id from Article").Count();
             return data;
         }
@@ -48,9 +50,15 @@ namespace MoXiang.Application
         public async Task<TableData> GetDetails(int ArticleId)
         {
             TableData data = new TableData();
-            string sql = "select a.Id,a.Title,a.Banner,a.IsTop,a.IsHot,a.Summary,a.CreateTime,a.Hits from Article a where a.Id=@ArticleId";
-            var article =await  _repositorybase.FindAsync<Article>(sql,new { ArticleId=ArticleId });
-            data.Data = article.FirstOrDefault();
+            string articlesql = @"select a.Id,a.Title,a.Content,a.Hits,a.UpdateTime,b.Name TypeName
+                            from Article a left join ArticleType b on a.TypeId = b.Id  where a.Id = @ArticleId; ";
+            string commentssql = "select Id,Content,CreateTime,CreateUser,CommentId from `Comment` where ArticleId=@ArticleId;";
+            var article =(await  _repositorybase.FindAsync<Article>(articlesql, new { ArticleId=ArticleId })).FirstOrDefault();
+            var comments = await _repositorybase.FindAsync<Article>(commentssql, new { ArticleId = ArticleId });
+            var details=article.MapTo<ArticleDetailsResp>();
+            var commentsList = comments.MapToList<CommentsListResp>();
+            details.CommentsList = commentsList;
+            data.Data = details;
             return data;
         }
         /// <summary>
