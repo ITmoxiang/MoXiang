@@ -11,15 +11,14 @@
           <!-- 文章头部 -->
           <header class="entry-header">
             <!-- 标题输出 -->
-            <h1 class="entry-title">{{ articles.Title }}</h1>
+            <h1 class="entry-title">{{ articles.title }}</h1>
             <hr />
             <div class="breadcrumbs">
-              <div id="crumbs">最后更新时间：{{ articles.UpdateTime }}</div>
+              <div id="crumbs">最后更新时间：{{ articles.updateTime }}</div>
             </div>
           </header>
           <!-- 正文输出 -->
-          <div v-html="articles.Content">
-            {{ articles.content }}
+          <div v-html="articles.content" class="entry-content">
           </div>
           <!-- 文章底部 -->
           <section-title>
@@ -27,34 +26,27 @@
               <!-- 阅读次数 -->
               <div class="post-like">
                 <i class="iconfont iconeyes"></i>
-                <span class="count">{{ articles.Hits }}</span>
+                <span class="count">{{ articles.hits }}</span>
               </div>
 
               <!-- 文章标签 -->
               <div class="post-tags">
                 <i class="iconfont iconcategory"></i>
                 <router-link to="/category/web">{{
-                  articles.label
+                  articles.typeName
                 }}</router-link>
               </div>
             </footer>
           </section-title>
 
-          <div class="comments">
+          <!--<div class="comments">
             <comment
-              v-for="item in comments"
-              :key="item.comment.id"
-              :comment="item.comment"
+              v-for="item in articles.commentsList"
+              :key="item.id"
+              :comment="item.content"
             >
-              <template v-if="item.reply.length">
-                <comment
-                  v-for="reply in item.reply"
-                  :key="reply.id"
-                  :comment="reply"
-                ></comment>
-              </template>
             </comment>
-          </div>
+          </div>-->
         </article>
       </main>
     </div>
@@ -66,13 +58,12 @@ import Banner from "@/components/banner";
 import sectionTitle from "@/components/section-title";
 import comment from "@/components/comment";
 import menuTree from "@/components/menu-tree";
-import { fetchComment, fetcharticle } from "../api";
+import { fetcharticle } from "../api";
 export default {
   name: "articles",
   data() {
     return {
       showDonate: false,
-      comments: [],
       articles: [],
       menus: [],
     };
@@ -85,19 +76,12 @@ export default {
   }, //this.$route.params.id,
   methods: {
     getComment() {
-      fetchComment()
-        .then((res) => {
-          this.comments = res.data || [];
-        })
-        .catch((err) => {
-          console.log(err);
-        });
       fetcharticle({ ArticleId: this.$route.params.id })
         .then((res) => {
           this.articles = res.data || [];
           this.$nextTick(() => {
               this.createMenus();
-          })
+          });
         })
         .catch((err) => {
           console.log(err);

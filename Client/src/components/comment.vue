@@ -6,8 +6,8 @@
                 <section-title>
                     <div style="display: flex;align-items: center;justify-content: space-between;">
                         <div>
-                            <span class="from-user user-name">{{comment.fromUserName}}</span>
-                            <span class="to-user" v-if="comment.toUserId"><span style="margin: 0 5px;">@</span><span class="user-name">{{comment.toUserName}}</span></span>
+                            <span class="from-user user-name">{{comment.createUser}}</span>
+                            <span class="to-user" v-if="comment.toUserId"><span style="margin: 0 5px;">@</span><span class="user-name">{{comment.createUser}}</span></span>
                         </div>
                         <div style="font-size: 13px;">
                             <span style="color: #9c9c9c;margin-right: 20px;">{{comment.createTime | parseTime}}</span>

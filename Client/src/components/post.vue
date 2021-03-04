@@ -2,17 +2,17 @@
     <article class="post post-list">
         <div class="post-entry">
             <div class="feature">
-                <router-link :to="`/article/${post.Id}`">
-                    <img :src="post.Banner"/>
+                <router-link :to="`/article/${post.id}`">
+                    <img :src="post.banner"/>
                 </router-link>
             </div>
             <h1 class="entry-title">
-                <router-link :to="`/article/${post.Id}`"><span v-if="post.IsTop" style="color:#ff6d6d;font-weight:600">[置顶] </span>{{post.Title}}</router-link>
+                <router-link :to="`/article/${post.id}`"><span v-if="post.IsTop" style="color:#ff6d6d;font-weight:600">[置顶] </span>{{post.title}}</router-link>
             </h1>
             <div class="p-time">
-                <i class="iconfont iconmeditor-time"></i> {{post.CreateTime}}<i v-if="post.isHot" class="iconfont iconfire" style="margin-left: 5px;color: #ff6d6d;"></i>
+                <i class="iconfont iconmeditor-time"></i> {{post.createTime}}<i v-if="post.isHot" class="iconfont iconfire" style="margin-left: 5px;color: #ff6d6d;"></i>
             </div>
-            <p class="summary">{{post.Summary}}</p>
+            <p class="summary">{{post.summary}}</p>
             <footer class="entry-footer">
                 <div class="post-more">
                     <!--<router-link :to="`/article/${post.id}`"><i class="iconfont iconfish-li" style="font-size: 25px;"></i></router-link>-->

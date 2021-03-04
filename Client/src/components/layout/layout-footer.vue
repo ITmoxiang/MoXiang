@@ -8,7 +8,7 @@
                 <div style="font-size:17px;font-weight: bold;">外部连接</div>
                 <div><a target="_blank" class="out-link" href="https://github.com/ITmoxiang/MoXiang">GitHub</a></div>
                 <!--<div><a target="_blank" class="out-link" href="#">后台管理</a></div>-->
-                <div><a target="_blank" class="out-link" href="www.fengziy.cn">Gblog</a></div>
+                <div><a target="_blank" class="out-link" href="https://www.fengziy.cn/">Gblog</a></div>
             </div>
             <div class="footer-item">
                 <div>本站已苟活 {{runTimeInterval}}</div>
