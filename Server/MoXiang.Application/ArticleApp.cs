@@ -30,12 +30,14 @@ namespace MoXiang.Application
             string sql = "select a.Id,a.Title,a.Banner,a.IsTop,a.IsHot,a.Summary,a.CreateTime,a.Hits,count(b.Id) commentsCount from Article a left join Comment b on b.ArticleId = a.Id";
             if (!string.IsNullOrWhiteSpace(req.Title))
             {
-                sql +=$" where a.Title like '%@Title%' GROUP BY a.Id LIMIT {req.page*req.limit},@limit";
+                sql +=$" where a.Title like @Title GROUP BY a.Id LIMIT {req.page*req.limit},@limit";
+                req.Title = string.Format("%{0}%", req.Title);
             }
             else 
             {
                 sql += $" GROUP BY a.Id LIMIT {req.page*req.limit},@limit";
             }
+            
             var articleList =await  _repositorybase.FindAsync<Article>(sql, req);
             var ArticleListResps = articleList.MapToList<ArticleListResp>();
             data.Data = ArticleListResps;
