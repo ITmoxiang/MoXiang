@@ -92,6 +92,12 @@ export default {
       return this.$store.getters.notice;
     },
   },
+  //监听路由是否改变
+  watch: {
+      '$route'(){
+        this.fetchList();
+      }
+  },
   methods: {
     fetchFocus() {
       fetchFocus()
@@ -103,7 +109,7 @@ export default {
         });
     },
     fetchList() {
-      fetchList({ Title: null, page: this.currPage, limit: 10 })
+      fetchList({ Title: this.searchWords, page: this.currPage, limit: 10 })
         .then((res) => {
           this.postList = res.data;
         })
