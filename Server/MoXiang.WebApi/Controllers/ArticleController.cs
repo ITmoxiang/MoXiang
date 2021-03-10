@@ -55,7 +55,7 @@ namespace MoXiang.WebApi.Controllers
         }
 
         /// <summary>
-        /// 添加文章
+        /// 修改文章
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>

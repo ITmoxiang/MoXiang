@@ -64,19 +64,7 @@ namespace MoXiang.Application
             result.Data = dto;
             return result;
         }
-        /// <summary>
-        /// redis示例
-        /// </summary>
-        /// <returns></returns>
-        public async Task<string> Get()
-        {
-            // 往Redis里面存入数据
-            //await _redis.HashSetAsync("Token",new HashEntry[] { new HashEntry(new RedisValue("a1"), new RedisValue("tom")) {  }, new HashEntry(new RedisValue("a2"), new RedisValue("zlg")) { } });
-            await RedisHelper.SetAsync("Token", "123546");
-            // 从Redis里面取数据
-            var name = await RedisHelper.GetAsync("Token");
-            return name;
-        }
+
         /// <summary>
         /// 获取用户详情
         /// </summary>

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using MoXiang.Infrastructure.Returned;
 using Newtonsoft.Json;
 using System;
+using System.Text.RegularExpressions;
 
 namespace MoXiang.WebApi.Nlog
 {
@@ -34,8 +35,16 @@ namespace MoXiang.WebApi.Nlog
 
                 //定义返回信息
                 Response res = new Response();
+                if (new Regex("^[\u4E00-\u9FA5]{0,}$").IsMatch(ex.Message))
+                {
+                    res.Message = ex.Message;
+                }
+                else 
+                {
+                    res.Message = "网络不稳定，请稍后重试";
+                }
                 res.Code = 500;
-                res.Message = "网络不稳定，请稍后重试";
+               
                 context.Result = new ContentResult
                 {
                     // 返回状态码设置为200，表示成功

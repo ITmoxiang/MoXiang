@@ -15,7 +15,7 @@ namespace MoXiang.Application.Response
         public bool IsHot { get; set; }
         public string Summary { get; set; }
         public int Hits { get; set; }
-        public DateTime CreateTime { get; set; }
+        public string CreateTime { get; set; }
         public int commentsCount { get; set; }
     }
 }

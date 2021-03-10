@@ -40,6 +40,7 @@ namespace MoXiang.Application
             
             var articleList =await  _repositorybase.FindAsync<Article>(sql, req);
             var ArticleListResps = articleList.MapToList<ArticleListResp>();
+            ArticleListResps.ForEach(a => a.CreateTime = Convert.ToDateTime(a.CreateTime).ToString("yyyy-MM-dd"));
             data.Data = ArticleListResps;
             data.Count = _repositorybase.Find<Article>("select id from Article").Count();
             return data;
@@ -58,6 +59,7 @@ namespace MoXiang.Application
             var article =(await  _repositorybase.FindAsync<Article>(articlesql, new { ArticleId=ArticleId })).FirstOrDefault();
             var comments = await _repositorybase.FindAsync<Article>(commentssql, new { ArticleId = ArticleId });
             var details=article.MapTo<ArticleDetailsResp>();
+            details.UpdateTime = Convert.ToDateTime(details.UpdateTime).ToString("yyyy-MM-dd");
             var commentsList = comments.MapToList<CommentsListResp>();
             details.CommentsList = commentsList;
             data.Data = details;

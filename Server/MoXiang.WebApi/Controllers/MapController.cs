@@ -45,6 +45,10 @@ namespace MoXiang.WebApi.Controllers
             return result;
         }
 
+        /// <summary>
+        /// NLog示例
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task aaaa()
         {
@@ -53,6 +57,22 @@ namespace MoXiang.WebApi.Controllers
 
             throw new Exception("报错啦");
         }
-        
+
+        /// <summary>
+        /// redis示例
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<string> Get()
+        {
+            try
+            {
+                return await _mapApp.Get();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

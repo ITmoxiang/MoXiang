@@ -13,7 +13,7 @@ namespace MoXiang.Application.Response
         public string TypeName { get; set; }
         public int Hits { get; set; }
         public string Content { get; set; }
-        public DateTime UpdateTime { get; set; }
+        public string UpdateTime { get; set; }
 
         public List<CommentsListResp> CommentsList { get; set; }
     }

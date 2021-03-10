@@ -60,23 +60,7 @@ namespace MoXiang.WebApi.Controllers
             return result;
         }
 
-        /// <summary>
-        /// redis示例
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<string>  Get()
-        {
-            try
-            {
-                return await _userinfoApp.Get();
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-        }
-
+ 
         /// <summary>
         /// 获取用户信息
         /// </summary>
