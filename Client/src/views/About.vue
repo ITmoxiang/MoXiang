@@ -20,12 +20,11 @@
           <section-title>关于博客</section-title>
           <div class="info-card">
             <p>
-              本网站采用Vue+.net 5 项目<a
+              本网站采用Vue+.net 5 项目开源地址：<a
                 target="_blank"
                 class="out-link"
                 href="https://github.com/ITmoxiang/MoXiang"
-                >GitHub</a
-              >，喜欢的话希望您点下小星星。
+                >GitHub</a>。
             </p>
           </div>
         </div>
@@ -35,11 +34,22 @@
             <div class="contactForm">
               <div class="form-item">
                 <label for="mail">邮箱</label>
-                <input class="v" type="email" name="mail" id="mail" />
+                <input
+                  class="v"
+                  type="email"
+                  name="mail"
+                  id="mail"
+                  ref="email"
+                />
               </div>
               <div class="form-item">
                 <label for="content">内容</label>
-                <textarea class="v" id="content" name="content"></textarea>
+                <textarea
+                  class="v"
+                  id="content"
+                  name="content"
+                  ref="content"
+                ></textarea>
               </div>
               <div class="form-item">
                 <label></label>
@@ -57,6 +67,7 @@ import sectionTitle from "@/components/section-title";
 //import {getTime,getTimeInterval} from '@/utils'
 // import Quote from "@/components/quote";
 // import {fetchFriend} from '../api'
+import { addmessage } from "../api";
 export default {
   name: "About",
   data() {
@@ -69,9 +80,28 @@ export default {
     sectionTitle,
   },
   methods: {
-      run:function(){
-          alert("此功能暂未开放,敬请期待");
+    run: function () {
+      var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+      if (
+        this.$refs.email.value != "" &&
+        !regEmail.test(this.$refs.email.value)
+      ) {
+        alert("邮箱错误，请输入正确的邮箱");
+      }else{
+        addmessage({
+        content: this.$refs.content.value,
+        eMail: this.$refs.email.value
+      })
+        .then((res) => {
+          alert("留言成功，收到后会尽快回复您");
+        })
+        .catch((err) => {
+          alert(err.message)
+        });
       }
+      
+      
+    },
   },
   mounted() {},
 };

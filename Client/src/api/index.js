@@ -56,3 +56,12 @@ export function fetcharticle(params) {
         params: params
     })
 }
+
+//添加留言
+export function addmessage(data) {
+    return request({
+        url: '/Message/Add',
+        method: 'post',
+        data
+    })
+}
