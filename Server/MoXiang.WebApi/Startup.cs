@@ -117,15 +117,16 @@ namespace MoXiang.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //swagger如发布后希望不继续使用，移入if即可
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "接口文档-通用");
+                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "接口文档-业务");
+                }
+                );
             }
-            //swagger如发布后希望不继续使用，移入if即可
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "接口文档-通用");
-                c.SwaggerEndpoint("/swagger/v2/swagger.json", "接口文档-业务");
-            }
-            );
+            
             // 允许所有跨域，CorsPolicy是在ConfigureServices方法中配置的跨域策略名称
             app.UseCors("CorsPolicy");
 

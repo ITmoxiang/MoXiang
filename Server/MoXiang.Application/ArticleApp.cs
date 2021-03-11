@@ -52,6 +52,8 @@ namespace MoXiang.Application
         /// <returns></returns>
         public async Task<TableData> GetDetails(int ArticleId)
         {
+            string updatesql = "update Article set Hits=Hits+1 where Id=@ArticleId";
+            await _repositorybase.UpDateAsync<Article>(updatesql, new { ArticleId = ArticleId });
             TableData data = new TableData();
             string articlesql = @"select a.Id,a.Title,a.Content,a.Hits,a.UpdateTime,b.Name TypeName
                             from Article a left join ArticleType b on a.TypeId = b.Id  where a.Id = @ArticleId; ";
@@ -72,9 +74,9 @@ namespace MoXiang.Application
         /// <returns></returns>
         public async Task Add(AddOrUpDataArticleReq req)
         {
-            string sql = "INSERT INTO Article(Title,Content,Bannerm,IsTop,IsHot,Summary,CreateTime,CreateUser,CreateUserId) VALUES(@Title,@Content,@Bannerm,@IsTop,@IsHot,@Summary,@CreateTime,@CreateUser,@CreateUserId)";
-            var articleMap = req.MapTo<Article>();
-            await _repositorybase.AddAsync<Article>(sql, articleMap);
+            //string sql = "INSERT INTO Article(Title,Content,Bannerm,IsTop,IsHot,Summary,CreateTime,CreateUser,CreateUserId) VALUES(@Title,@Content,@Bannerm,@IsTop,@IsHot,@Summary,@CreateTime,@CreateUser,@CreateUserId)";
+            //var articleMap = req.MapTo<Article>();
+            //await _repositorybase.AddAsync<Article>(sql, articleMap);
         }
         /// <summary>
         /// 修改文章
@@ -92,8 +94,8 @@ namespace MoXiang.Application
         /// <returns></returns>
         public async Task Delete(int ArticleId)
         {
-            string sql = "delete from Article where id=@ArticleId";
-            await _repositorybase.DeleteAsync<Article>(sql, ArticleId);
+            //string sql = "delete from Article where id=@ArticleId";
+            //await _repositorybase.DeleteAsync<Article>(sql, ArticleId);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace MoXiang.Application
 
             if (int.Parse(number) > 20)
             {
-                throw new Exception("今日留言已达上线，请明日重试。");
+                throw new Exception("今日留言已达上线请明日重试");
             }
             else 
             {
