@@ -49,7 +49,7 @@ service.interceptors.response.use(
     },
     error => {
         console.log('err' + error) // for debug
-        return Promise.reject(error)
+        return Promise.reject(error.response.data)
     }
 )
 

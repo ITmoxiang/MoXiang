@@ -6,7 +6,7 @@
       <div class="notify">
         <div class="search-result" v-if="hideSlogan">
           <span v-if="searchWords">搜索结果："{{ searchWords }}" 相关文章</span>
-          <span v-else-if="category">分类 "{{ category }}" 相关文章</span>
+          <!--<span v-else-if="category">分类 "{{ category }}" 相关文章</span>-->
         </div>
         <quote v-else>{{ notice }}</quote>
       </div>
@@ -55,7 +55,7 @@ import sectionTitle from "@/components/section-title";
 import Post from "@/components/post";
 import SmallIco from "@/components/small-ico";
 import Quote from "@/components/quote";
-import { fetchFocus, fetchList } from "../api";
+import { fetchList } from "../api";
 
 export default {
   name: "Home",
@@ -82,11 +82,11 @@ export default {
     searchWords() {
       return this.$route.params.words;
     },
-    category() {
-      return this.$route.params.cate;
-    },
+    //category() {
+      //return this.$route.params.cate;
+    //},
     hideSlogan() {
-      return this.category || this.searchWords;
+      return this.searchWords;//this.category || 
     },
     notice() {
       return this.$store.getters.notice;
@@ -99,7 +99,7 @@ export default {
       }
   },
   methods: {
-    fetchFocus() {
+    /*fetchFocus() {
       fetchFocus()
         .then((res) => {
           this.features = res.data || [];
@@ -107,9 +107,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-    },
+    },*/
     fetchList() {
-      fetchList({ Title: this.searchWords, page: this.currPage, limit: 10 })
+      fetchList({ Title: this.searchWords, page: this.currPage, limit: 5 })
         .then((res) => {
           this.postList = res.data;
         })
@@ -119,17 +119,17 @@ export default {
     },
     loadMore() {
       this.isloading = true;
-      fetchList({ page: this.currPage + 1, limit: 10 }).then((res) => {
+      fetchList({ page: this.currPage + 1, limit: 5 }).then((res) => {
         this.postList = this.postList.concat(res.data || []);
         this.isloading = false;
         this.currPage = this.currPage + 1;
-        this.isavailable=res.count < (this.currPage + 1) * 10 ? true : false;
-        this.hasNextPage = res.count < (this.currPage + 1) * 10 ? "已经到底了" : "加载更多";
+        this.isavailable=res.count < (this.currPage + 1) * 5 ? true : false;
+        this.hasNextPage = res.count < (this.currPage + 1) * 5? "已经到底了" : "加载更多";
       });
     },
   },
   mounted() {
-    this.fetchFocus();
+    //this.fetchFocus();
     this.fetchList();
   },
 };

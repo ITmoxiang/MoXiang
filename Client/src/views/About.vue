@@ -96,10 +96,9 @@ export default {
           alert("留言成功，收到后会尽快回复您");
         })
         .catch((err) => {
-          alert(err.message)
+          alert(err.Message)
         });
       }
-      
       
     },
   },

@@ -26,7 +26,7 @@
 
 <script>
     import HeaderSearch from '@/components/header-search'
-    import {fetchCategory} from '../../api'
+    //import {fetchCategory} from '../../api'
     export default {
         name: "layout-header",
         components: {HeaderSearch},
@@ -41,7 +41,7 @@
         },
         mounted(){
             window.addEventListener('scroll', this.watchScroll)
-            this.fetchCategory()
+            //this.fetchCategory()
         },
         beforeDestroy () {
             window.removeEventListener("scroll", this.watchScroll)
@@ -60,13 +60,13 @@
                 }
                 this.lastScrollTop = scrollTop
             },
-            fetchCategory() {
+            /*fetchCategory() {
                 fetchCategory().then(res => {
                     this.category = res.data
                 }).catch(err => {
                     console.log(err)
                 })
-            }
+            }*/
         }
     }
 </script>

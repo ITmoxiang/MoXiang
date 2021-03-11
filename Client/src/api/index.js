@@ -8,7 +8,7 @@ export function fetchList(params) {
     })
 }
 //焦点
-export function fetchFocus() {
+/*export function fetchFocus() {
     return request({
         url: '/UserInfo/list',
         method: 'get',
@@ -22,7 +22,7 @@ export function fetchCategory() {
         method: 'get',
         params: {}
     })
-}
+}*/
 //关联网站
 export function fetchFriend() {
     return request({
