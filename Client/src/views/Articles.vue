@@ -32,7 +32,7 @@
               <!-- 文章标签 -->
               <div class="post-tags">
                 <i class="iconfont iconcategory"></i>
-                <router-link to="/category/web">{{
+                <router-link :to="`/category/${articles.typeId}`">{{
                   articles.typeName
                 }}</router-link>
               </div>

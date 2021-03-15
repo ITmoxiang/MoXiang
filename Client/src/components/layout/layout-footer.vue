@@ -14,7 +14,7 @@
                 <div>本站已苟活 {{runTimeInterval}}</div>
             </div>
         </div>
-        <div class="copyright">Copyright © 2021 by moxiangblog.top . All rights reserved<a target="_blank" class="out-link" href="https://beian.miit.gov.cn/">豫ICP备2021005333号</a></div>
+        <div class="copyright">Copyright © 2021 by moxiangblog.top . All rights reserved<a target="_blank" class="out-link" href="https://beian.miit.gov.cn/">豫ICP备2021005333号-1</a></div>
     </div>
 </template>
 

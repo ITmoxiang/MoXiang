@@ -24,7 +24,8 @@
                 target="_blank"
                 class="out-link"
                 href="https://github.com/ITmoxiang/MoXiang"
-                >GitHub</a>。
+                >GitHub</a
+              >。
             </p>
           </div>
         </div>
@@ -81,25 +82,42 @@ export default {
   },
   methods: {
     run: function () {
-      var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-      if (
-        this.$refs.email.value != "" &&
-        !regEmail.test(this.$refs.email.value)
-      ) {
-        alert("邮箱错误，请输入正确的邮箱");
-      }else{
-        addmessage({
-        content: this.$refs.content.value,
-        eMail: this.$refs.email.value
+      this.$confirm("是否提交留言?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
       })
-        .then((res) => {
-          alert("留言成功，收到后会尽快回复您");
+        .then(() => {
+          var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+          if (
+            this.$refs.email.value != "" &&
+            !regEmail.test(this.$refs.email.value)
+          ) {
+            alert("邮箱错误，请输入正确的邮箱");
+          } else {
+            addmessage({
+              content: this.$refs.content.value,
+              eMail: this.$refs.email.value,
+            })
+              .then((res) => {
+                this.$message({
+                  type: 'success',
+                  message: "留言成功，收到后会尽快回复您",
+                });
+              })
+              .catch((err) => {
+                this.$message({
+                  type: "info",
+                  message: "留言失败" + err.Message,
+                });
+              });
+          }
         })
-        .catch((err) => {
-          alert(err.Message)
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消留言",
+          });
         });
-      }
-      
     },
   },
   mounted() {},

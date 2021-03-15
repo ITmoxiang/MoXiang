@@ -10,13 +10,13 @@ const routes = [
         name: 'home',
         component: () => import('../views/Home.vue'),
         meta: { title: '首页'}
-    },/*
+    },
     {
         path: '/category/:cate',
         name: 'category',
         component: () => import('../views/Home.vue'),
         meta: { title: '分类', params: 'cate'}
-    },*/
+    },
     {
         path: '/search/:words',
         name: 'search',

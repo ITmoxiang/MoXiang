@@ -75,7 +75,7 @@
     #layout-header {
         position: fixed;
         top: 0;
-        z-index: 9;
+        z-index: 9999;
         width: 100%;
         height: 80px;
         padding: 0 80px;

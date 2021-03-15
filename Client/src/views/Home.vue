@@ -82,9 +82,9 @@ export default {
     searchWords() {
       return this.$route.params.words;
     },
-    //category() {
-      //return this.$route.params.cate;
-    //},
+    category() {
+      return this.$route.params.cate;
+    },
     hideSlogan() {
       return this.searchWords;//this.category || 
     },
@@ -109,7 +109,7 @@ export default {
         });
     },*/
     fetchList() {
-      fetchList({ Title: this.searchWords, page: this.currPage, limit: 5 })
+      fetchList({ Title: this.searchWords,Category:this.category, page: this.currPage, limit: 5 })
         .then((res) => {
           this.postList = res.data;
         })
@@ -119,7 +119,7 @@ export default {
     },
     loadMore() {
       this.isloading = true;
-      fetchList({ page: this.currPage + 1, limit: 5 }).then((res) => {
+      fetchList({ Title: this.searchWords,Category:this.category,page: this.currPage + 1, limit: 5 }).then((res) => {
         this.postList = this.postList.concat(res.data || []);
         this.isloading = false;
         this.currPage = this.currPage + 1;
