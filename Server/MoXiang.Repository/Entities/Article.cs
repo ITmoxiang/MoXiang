@@ -33,6 +33,8 @@ namespace MoXiang.Repository.Entities
         public string Content { get; set; }
         [Description("阅读次数")]
         public int Hits { get; set; }
+        [Description("文章分类")]
+        public string TypeId { get; set; }
         [Description("文章标签")]
         public string Label { get; set; }
         [Description("文章头图片")]

@@ -30,10 +30,14 @@ namespace MoXiang.Application
             string sql = "select a.Id,a.Title,a.Banner,a.IsTop,a.IsHot,a.Summary,a.CreateTime,a.Hits,count(b.Id) commentsCount from Article a left join Comment b on b.ArticleId = a.Id";
             if (!string.IsNullOrWhiteSpace(req.Title))
             {
-                sql +=$" where a.Title like @Title GROUP BY a.Id LIMIT {req.page*req.limit},@limit";
+                sql += $" where a.Title like @Title GROUP BY a.Id LIMIT {req.page * req.limit},@limit";
                 req.Title = string.Format("%{0}%", req.Title);
             }
-            else 
+            else if (!string.IsNullOrWhiteSpace(req.Category))
+            {
+                sql += $" where a.TypeId = @Category GROUP BY a.Id LIMIT {req.page * req.limit},@limit";
+            }
+            else
             {
                 sql += $" GROUP BY a.Id LIMIT {req.page*req.limit},@limit";
             }
@@ -55,7 +59,7 @@ namespace MoXiang.Application
             string updatesql = "update Article set Hits=Hits+1 where Id=@ArticleId";
             await _repositorybase.UpDateAsync<Article>(updatesql, new { ArticleId = ArticleId });
             TableData data = new TableData();
-            string articlesql = @"select a.Id,a.Title,a.Content,a.Hits,a.UpdateTime,b.Name TypeName
+            string articlesql = @"select a.Id,a.Title,a.Content,a.Hits,a.UpdateTime,b.Name TypeName,b.Id TypeId
                             from Article a left join ArticleType b on a.TypeId = b.Id  where a.Id = @ArticleId; ";
             string commentssql = "select Id,Content,CreateTime,CreateUser,CommentId from `Comment` where ArticleId=@ArticleId;";
             var article =(await  _repositorybase.FindAsync<Article>(articlesql, new { ArticleId=ArticleId })).FirstOrDefault();

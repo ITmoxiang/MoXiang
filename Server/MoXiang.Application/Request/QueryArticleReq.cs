@@ -12,5 +12,10 @@ namespace MoXiang.Application.Request
         /// 标题
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// 分类
+        /// </summary>
+        public string Category { get; set; }
     }
 }

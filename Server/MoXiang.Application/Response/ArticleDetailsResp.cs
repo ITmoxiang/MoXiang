@@ -11,6 +11,7 @@ namespace MoXiang.Application.Response
         public int Id { get; set; }
         public string Title { get; set; }
         public string TypeName { get; set; }
+        public string TypeId { get; set; }
         public int Hits { get; set; }
         public string Content { get; set; }
         public string UpdateTime { get; set; }
